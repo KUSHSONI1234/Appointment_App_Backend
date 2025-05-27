@@ -38,6 +38,14 @@ namespace RegisterAPI.Controllers
             return Ok(new { message = "User registered successfully" });
         }
 
+        [HttpGet("register")]
+        public async Task<IActionResult> GetRegisteredUsers()
+        {
+            var users = await _context.Users.ToListAsync();
+            return Ok(users);
+        }
+
+
 
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginDTO loginDto)
