@@ -11,7 +11,7 @@ using RegisterAPI.Data;
 namespace RegisterAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250526055534_InitialCreate")]
+    [Migration("20250527093337_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -19,7 +19,7 @@ namespace RegisterAPI.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.5")
+                .HasAnnotation("ProductVersion", "8.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
