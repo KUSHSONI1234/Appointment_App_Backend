@@ -6,14 +6,27 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ✅ Add EF Core
+// ✅ 1. Configure EF Core
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// ✅ Add Controllers
+// ✅ 2. Add Controllers
 builder.Services.AddControllers();
 
-// ✅ Add JWT Auth
+// ✅ 3. Add CORS for Netlify + Localhost
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowLocalAndNetlify", policy =>
+    {
+        policy.WithOrigins(
+                "http://localhost:4200",
+                "https://appointment-web.netlify.app")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
+// ✅ 4. Add JWT Authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -29,25 +42,13 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-// ✅ Add CORS for both localhost and Netlify
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowLocalAndNetlify", policy =>
-    {
-        policy.WithOrigins(
-                "http://localhost:4200",
-                "https://appointment-web.netlify.app")
-              .AllowAnyHeader()
-              .AllowAnyMethod();
-    });
-});
+var app = builder.Build();
 
-var app = builder.Build(); // ✅ app created here
-
-// ✅ Middleware — after `app` is created
-app.UseCors("AllowLocalAndNetlify");
-
+// ✅ 5. Use Middlewares — correct order matters!
 app.UseRouting();
+
+app.UseCors("AllowLocalAndNetlify"); // ✅ must come before auth
+
 app.UseAuthentication();
 app.UseAuthorization();
 
