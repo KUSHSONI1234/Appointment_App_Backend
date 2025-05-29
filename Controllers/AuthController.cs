@@ -75,8 +75,15 @@ namespace RegisterAPI.Controllers
             var token = tokenHandler.CreateToken(tokenDescriptor);
             var tokenString = tokenHandler.WriteToken(token);
 
-            return Ok(new { token = tokenString });
+            // ✅ Return token with full name and email
+            return Ok(new
+            {
+                token = tokenString,
+                fullName = user.FullName,
+                email = user.Email
+            });
         }
+
 
 
     }

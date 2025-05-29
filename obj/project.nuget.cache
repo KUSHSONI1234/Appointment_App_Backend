@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "s2ji9V1axWM=",
+  "dgSpecHash": "COoI83rQy9Y=",
   "success": true,
-  "projectFilePath": "C:\\Users\\user\\Desktop\\Appointment_backend\\RegisterAPI\\RegisterAPI.csproj",
+  "projectFilePath": "C:\\Users\\user\\Desktop\\Appointment_backend\\Appointment_App_Backend\\RegisterAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
